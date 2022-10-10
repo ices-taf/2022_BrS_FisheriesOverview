@@ -177,7 +177,7 @@ dev.off()
 bar <- plot_CLD_bar(catch_current, guild = "All", caption = TRUE, cap_year , cap_month , return_data = FALSE)
 
 bar_dat <- plot_CLD_bar(catch_current, guild = "All", caption = TRUE, cap_year, cap_month , return_data = TRUE)
-write.taf(bar_dat, file =paste0(year_cap, "_", ecoreg, "_FO_SAG_Current_All.csv"), dir = "report" )
+write.taf(bar_dat, file =paste0(cap_year, "_", ecoreg, "_FO_SAG_Current_All.csv"), dir = "report" )
 
 kobe <- plot_kobe(catch_current, guild = "All", caption = TRUE, cap_year, cap_month , return_data = FALSE)
 #check this file name
