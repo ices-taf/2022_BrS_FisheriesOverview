@@ -19,6 +19,7 @@ clean_status <- read.taf("data/clean_status.csv")
 #set year and month for captions:
 cap_month = "October"
 cap_year = "2022"
+ecoreg <- "BrS"
 # set year for plot calculations
 
 year = 2022
@@ -42,10 +43,10 @@ unique(trends$FisheriesGuild)
 plot_stock_trends(trends, guild="demersal", cap_year, cap_month , return_data = FALSE)
 trends2 <- trends %>% filter(StockKeyLabel != "cod.27.1-2.coastN")
 plot_stock_trends(trends2, guild="demersal", cap_year, cap_month , return_data = FALSE)
-ggplot2::ggsave(paste0(year_cap, "_", ecoreg,"_FO_SAG_Trends_demersal.png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
+ggplot2::ggsave(paste0(cap_year, "_", ecoreg,"_FO_SAG_Trends_demersal.png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
 
 dat <- plot_stock_trends(trends, guild="demersal", cap_year , cap_month, return_data = TRUE)
-write.taf(dat, file =paste0(year_cap, "_", ecoreg, "_FO_SAG_Trends_demersal.csv"), dir = "report")
+write.taf(dat, file =paste0(cap_year, "_", ecoreg, "_FO_SAG_Trends_demersal.csv"), dir = "report")
 
 # 2. Pelagic
 #~~~~~~~~~~~
@@ -109,7 +110,7 @@ write.taf(dat, file =paste0(year_cap, "_", ecoreg, "_EO_SAG_SpeciesGuildList.csv
 bar <- plot_CLD_bar(catch_current, guild = "demersal", caption = TRUE, cap_year, cap_month, return_data = FALSE)
 
 bar_dat <- plot_CLD_bar(catch_current, guild = "demersal", caption = TRUE, cap_year , cap_month , return_data = TRUE)
-write.taf(bar_dat, file =paste0(year_cap, "_", ecoreg, "_FO_SAG_Current_demersal.csv"), dir = "report" )
+write.taf(bar_dat, file =paste0(cap_year, "_", ecoreg, "_FO_SAG_Current_demersal.csv"), dir = "report" )
 
 kobe <- plot_kobe(catch_current, guild = "demersal", caption = TRUE, cap_year , cap_month , return_data = FALSE)
 #kobe_dat is just like bar_dat with one less variable

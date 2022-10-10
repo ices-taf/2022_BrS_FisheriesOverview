@@ -16,7 +16,7 @@ sid <- read.taf("bootstrap/data/ICES_StockInformation/sid.csv")
 # 1: ICES official catch statistics
 
 hist <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_historical_catches.csv")
-official <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_2006_2018_catches.csv")
+official <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_2006_2019_catches.csv")
 prelim <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_preliminary_catches.csv")
 
 catch_dat <-
@@ -45,9 +45,9 @@ write.taf(catch_dat, dir = "data", quote = TRUE)
 
 
 # 2: SAG
-sag_sum <- read.taf("bootstrap/data/SAG_data/SAG_summary.csv")
-sag_refpts <- read.taf("bootstrap/data/SAG_data/SAG_refpts.csv")
-sag_status <- read.taf("bootstrap/data/SAG_data/SAG_status.csv")
+sag_sum <- read.taf("bootstrap/data/SAG_data/SAG_complete_BrS.csv")
+# sag_refpts <- read.taf("bootstrap/data/SAG_data/SAG_refpts.csv")
+sag_status <- read.taf("bootstrap/data/SAG_data/SAG_status_BrS.csv")
 
 
 # 2022 update: this still applies:
@@ -87,5 +87,5 @@ Barents_stockList <- c("aru.27.123a4",
 clean_sag<-clean_sag%>%filter(StockKeyLabel %in% Barents_stockList)
 clean_status<-clean_status%>%filter(StockKeyLabel %in% Barents_stockList)
 
-write.taf(clean_sag, dir = "data")
+write.taf(clean_sag, dir = "data", quote = TRUE)
 write.taf(clean_status, dir = "data", quote = TRUE)
