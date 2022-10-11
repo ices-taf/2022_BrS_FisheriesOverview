@@ -50,7 +50,7 @@ write.taf(dat, file =paste0(cap_year, "_", ecoreg, "_FO_SAG_Trends_demersal.csv"
 
 # 2. Pelagic
 #~~~~~~~~~~~
-trends <- trends %>% filter(StockKeyLabel != "bsf.27.nea")
+# trends <- trends %>% filter(StockKeyLabel != "bsf.27.nea")
 # nothing here this year
 plot_stock_trends(trends, guild="pelagic", cap_year, cap_month , return_data = FALSE)
 ggplot2::ggsave(paste0(year_cap, "_", ecoreg, "_FO_SAG_Trends_pelagic.png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
@@ -105,6 +105,12 @@ write.taf(dat, file =paste0(year_cap, "_", ecoreg, "_EO_SAG_SpeciesGuildList.csv
 # B.Current catches
 #~~~~~~~~~~~~~~~#
 
+catch_current$Status[which(catch_current$StockKeyLabel == "cod.27.1-2")] <- "GREY" 
+catch_current$Status[which(catch_current$StockKeyLabel == "had.27.1-2")] <- "GREY"  
+catch_current$Status[which(catch_current$StockKeyLabel == "cap.27.1-2")] <- "GREY"  
+catch_current$Status[which(catch_current$StockKeyLabel == "ghl.27.1-2")] <- "GREY"  
+catch_current$Status[which(catch_current$StockKeyLabel == "reb.27.1-2")] <- "GREY"  
+
 # 1. Demersal
 #~~~~~~~~~~~
 bar <- plot_CLD_bar(catch_current, guild = "demersal", caption = TRUE, cap_year, cap_month, return_data = FALSE)
@@ -112,7 +118,9 @@ bar <- plot_CLD_bar(catch_current, guild = "demersal", caption = TRUE, cap_year,
 bar_dat <- plot_CLD_bar(catch_current, guild = "demersal", caption = TRUE, cap_year , cap_month , return_data = TRUE)
 write.taf(bar_dat, file =paste0(cap_year, "_", ecoreg, "_FO_SAG_Current_demersal.csv"), dir = "report" )
 
-kobe <- plot_kobe(catch_current, guild = "demersal", caption = TRUE, cap_year , cap_month , return_data = FALSE)
+catch_current2 <- catch_current %>% filter(StockKeyLabel != ("cod.27.1-2"))
+catch_current2 <- catch_current2 %>% filter(StockKeyLabel != ("had.27.1-2"))
+kobe <- plot_kobe(catch_current2, guild = "demersal", caption = TRUE, cap_year , cap_month , return_data = FALSE)
 #kobe_dat is just like bar_dat with one less variable
 #kobe_dat <- plot_kobe(catch_current, guild = "Demersal", caption = T, cap_year , cap_month , return_data = TRUE)
 
@@ -179,7 +187,10 @@ bar <- plot_CLD_bar(catch_current, guild = "All", caption = TRUE, cap_year , cap
 bar_dat <- plot_CLD_bar(catch_current, guild = "All", caption = TRUE, cap_year, cap_month , return_data = TRUE)
 write.taf(bar_dat, file =paste0(cap_year, "_", ecoreg, "_FO_SAG_Current_All.csv"), dir = "report" )
 
-kobe <- plot_kobe(catch_current, guild = "All", caption = TRUE, cap_year, cap_month , return_data = FALSE)
+catch_current2 <- catch_current %>% filter(StockKeyLabel != ("cod.27.1-2"))
+catch_current2 <- catch_current2 %>% filter(StockKeyLabel != ("had.27.1-2"))
+
+kobe <- plot_kobe(catch_current2, guild = "All", caption = TRUE, cap_year, cap_month , return_data = FALSE)
 #check this file name
 png("report/2022_BrS_FO_SAG_Current_All.png",
     width = 131.32,
@@ -228,9 +239,9 @@ plot_status_prop_pies(clean_status, cap_month, cap_year)
 # will make qual_green just green
 unique(clean_status$FishingPressure)
 # clean_status2 <- clean_status
-# clean_status$FishingPressure <- gsub("qual_GREEN", "GREEN", clean_status$FishingPressure)
+clean_status$FishingPressure <- gsub("qual_GREEN", "GREEN", clean_status$FishingPressure)
 # plot_status_prop_pies(clean_status2, cap_month, cap_year)
-# plot_status_prop_pies(clean_status, cap_month, cap_year)
+plot_status_prop_pies(clean_status, cap_month, cap_year)
 ggplot2::ggsave(paste0(year_cap,"_", ecoreg, "_FO_SAG_ICESpies.png"), path= "report/", width = 178, height = 178, units = "mm", dpi = 300)
 
 dat <- plot_status_prop_pies(clean_status, cap_month, cap_year, return_data = TRUE)

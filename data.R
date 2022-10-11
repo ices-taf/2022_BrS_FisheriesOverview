@@ -59,9 +59,10 @@ sag_complete$MSYBtrigger[which(sag_complete$FishStock == "cod.27.1-2.coastN")] <
 
 # sag_complete$FMSY[which(sag_complete$FishStock == "cod.27.1-2.coastN")] <- 0.32
 sag_complete$MSYBtrigger[which(sag_complete$FishStock == "reg.27.1-2")] <- 68600 #PA
+sag_complete$MSYBtrigger[which(sag_complete$FishStock == "cap.27.1-2")] <- 200000 #PA
 
 ## change year of last assesment for the 5 stocks
-check <- sid %>% filter(StockKeyLabel == "cap.27.1-2")
+# check <- sid %>% filter(StockKeyLabel == "cap.27.1-2")
 # tibble(check)
 # sid$YearOfLastAssessment[sid$StockKeyLabel == "Cap.27.1-2"]
 
