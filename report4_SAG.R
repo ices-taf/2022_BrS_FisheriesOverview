@@ -1,6 +1,6 @@
 
 library(icesTAF)
-taf.library(icesFO)
+library(icesFO)
 library(sf)
 library(ggplot2)
 library(dplyr)
@@ -50,23 +50,23 @@ write.taf(dat, file =paste0(cap_year, "_", ecoreg, "_FO_SAG_Trends_demersal.csv"
 
 # 2. Pelagic
 #~~~~~~~~~~~
-# trends <- trends %>% filter(StockKeyLabel != "bsf.27.nea")
-#nothing here this year
-# plot_stock_trends(trends, guild="pelagic", cap_year, cap_month , return_data = FALSE)
-# ggplot2::ggsave(paste0(year_cap, "_", ecoreg, "_FO_SAG_Trends_pelagic.png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
-# 
-# dat <- plot_stock_trends(trends, guild="pelagic", cap_year, cap_month, return_data = TRUE)
-# write.taf(dat,file =paste0(year_cap, "_", ecoreg, "_FO_SAG_Trends_pelagic.csv"), dir = "report")
+trends <- trends %>% filter(StockKeyLabel != "bsf.27.nea")
+# nothing here this year
+plot_stock_trends(trends, guild="pelagic", cap_year, cap_month , return_data = FALSE)
+ggplot2::ggsave(paste0(year_cap, "_", ecoreg, "_FO_SAG_Trends_pelagic.png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
+
+dat <- plot_stock_trends(trends, guild="pelagic", cap_year, cap_month, return_data = TRUE)
+write.taf(dat,file =paste0(year_cap, "_", ecoreg, "_FO_SAG_Trends_pelagic.csv"), dir = "report")
 
 # 3. Crustacean
 #~~~~~~~~~~~
 plot_stock_trends(trends, guild="crustacean", cap_year, cap_month ,return_data = FALSE )
 trends2 <- trends %>% filter(StockKeyLabel != "MEAN")
 plot_stock_trends(trends2, guild="crustacean", cap_year, cap_month ,return_data = FALSE )
-ggplot2::ggsave(paste0(year_cap, "_", ecoreg, "_FO_SAG_Trends_crustacean.png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
+ggplot2::ggsave(paste0(cap_year, "_", ecoreg, "_FO_SAG_Trends_crustacean.png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
 
 dat <- plot_stock_trends(trends, guild="crustacean", cap_year , cap_month , return_data = TRUE)
-write.taf(dat, file =paste0(year_cap, "_", ecoreg, "_FO_SAG_Trends_crustacean.csv"), dir = "report" )
+write.taf(dat, file =paste0(cap_year, "_", ecoreg, "_FO_SAG_Trends_crustacean.csv"), dir = "report" )
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~#

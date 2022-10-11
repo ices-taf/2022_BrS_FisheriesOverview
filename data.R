@@ -1,7 +1,7 @@
 # Initial formatting of the data
 
 library(icesTAF)
-taf.library(icesFO)
+library(icesFO)
 library(dplyr)
 
 mkdir("data")
@@ -58,26 +58,30 @@ sag_complete$FMSY[which(sag_complete$FishStock == "cod.27.1-2.coastN")] <- 0.176
 sag_complete$MSYBtrigger[which(sag_complete$FishStock == "cod.27.1-2.coastN")] <- 67743
 
 # sag_complete$FMSY[which(sag_complete$FishStock == "cod.27.1-2.coastN")] <- 0.32
-# sag_complete$MSYBtrigger[which(sag_complete$FishStock == "cod.27.1-2.coastN")] <- 220000
+sag_complete$MSYBtrigger[which(sag_complete$FishStock == "reg.27.1-2")] <- 68600 #PA
 
+## change year of last assesment for the 5 stocks
+check <- sid %>% filter(StockKeyLabel == "cap.27.1-2")
+# tibble(check)
+# sid$YearOfLastAssessment[sid$StockKeyLabel == "Cap.27.1-2"]
 
 clean_sag <- format_sag(sag_complete, sid)
 clean_status <- format_sag_status(status, 2022, "Barents Sea")
 
 # we can't show sag data for cod, had, cap, ghl and reb:
-
+# Cap.27.1-2, Cod.27.1-2,  Ghl.27.1-2, Had.27.1-2, Reb.27.1-2
 
 Barents_stockList <- c("aru.27.123a4",
-                       # "cap.27.1-2",
-                       # "cod.27.1-2",
+                       "cap.27.1-2",
+                       "cod.27.1-2",
                        "cod.27.1-2.coastN",
                        "gfb.27.nea",
-                       # "ghl.27.1-2",
-                       # "had.27.1-2",
+                       "ghl.27.1-2",
+                       "had.27.1-2",
                        "lin.27.1-2",
                        "pok.27.1-2",
                        "pra.27.1-2",
-                       # "reb.27.1-2",
+                       "reb.27.1-2",
                        "reg.27.1-2",
                        "rjr.27.23a4",
                        "rng.27.1245a8914ab",
