@@ -19,9 +19,6 @@ hist <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_historical_catches.cs
 official <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_2006_2019_catches.csv")
 prelim <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_preliminary_catches.csv")
 
-catch_dat <-
-  format_catches(2022, "Barents Sea",
-    hist, official, prelim, species_list, sid)
 
 #preliminary catches are not complete
 catch_dat <-
@@ -61,10 +58,6 @@ sag_complete$MSYBtrigger[which(sag_complete$FishStock == "cod.27.1-2.coastN")] <
 sag_complete$MSYBtrigger[which(sag_complete$FishStock == "reg.27.1-2")] <- 68600 #PA
 sag_complete$MSYBtrigger[which(sag_complete$FishStock == "cap.27.1-2")] <- 200000 #PA
 
-## change year of last assesment for the 5 stocks
-# check <- sid %>% filter(StockKeyLabel == "cap.27.1-2")
-# tibble(check)
-# sid$YearOfLastAssessment[sid$StockKeyLabel == "Cap.27.1-2"]
 
 clean_sag <- format_sag(sag_complete, sid)
 clean_status <- format_sag_status(status, 2022, "Barents Sea")
