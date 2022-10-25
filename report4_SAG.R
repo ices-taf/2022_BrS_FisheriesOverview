@@ -230,24 +230,39 @@ ggplot2::ggsave(paste0(year_cap,"_", ecoreg, "_FO_SAG_ICESpies.png"), path= "rep
 dat <- plot_status_prop_pies(clean_status, cap_month, cap_year, return_data = TRUE)
 write.taf(dat, file= paste0(year_cap,"_", ecoreg, "_FO_SAG_ICESpies.csv"),dir ="report")
 
+#second run without 5 stocks
+
+plot_status_prop_pies(clean_status_updated, cap_month, cap_year)
+# will make qual_green just green
+unique(clean_status_updated$FishingPressure)
+# clean_status2 <- clean_status
+# clean_status$FishingPressure <- gsub("qual_GREEN", "GREEN", clean_status$FishingPressure)
+# plot_status_prop_pies(clean_status2, cap_month, cap_year)
+# plot_status_prop_pies(clean_status, cap_month, cap_year)
+ggplot2::ggsave(paste0(year_cap,"_", ecoreg, "_FO_SAG_ICESpies_without5stocks.png"), path= "report/", width = 178, height = 178, units = "mm", dpi = 300)
+
+dat <- plot_status_prop_pies(clean_status_updated, cap_month, cap_year, return_data = TRUE)
+write.taf(dat, file= paste0(year_cap,"_", ecoreg, "_FO_SAG_ICESpies_without5stocks.csv"),dir ="report")
+
+
 #~~~~~~~~~~~~~~~#
 #D. GES pies
 #~~~~~~~~~~~~~~~#
 
 #check, some issue with red
-plot_GES_pies(clean_status, catch_current, cap_month, cap_year)
-unique(clean_status$FishingPressure)
-unique(clean_status$StockSize)
+plot_GES_pies(clean_status_updated, catch_current, cap_month, cap_year)
+unique(clean_status_updated$FishingPressure)
+unique(clean_status_updated$StockSize)
 
 # clean_status2 <- clean_status
 # clean_status2$FishingPressure<- gsub("qual_GREEN", "GREEN", clean_status2$FishingPressure) 
 # unique(clean_status2$FishingPressure)
 # plot_GES_pies(clean_status2, catch_current, cap_month, cap_year)
 
-ggplot2::ggsave(paste0(year_cap,"_",ecoreg,"_FO_SAG_GESpies.png"),path = "report",width = 178, height = 178, units = "mm",dpi = 300)
+ggplot2::ggsave(paste0(year_cap,"_",ecoreg,"_FO_SAG_GESpies_without5stocks.png"),path = "report",width = 178, height = 178, units = "mm",dpi = 300)
 
-dat <- plot_GES_pies(clean_status, catch_current, cap_month, cap_year, return_data = TRUE)
-write.taf(dat, file = paste0(year_cap,"_",ecoreg, "_FO_SAG_GESpies.csv"),dir ="report")
+dat <- plot_GES_pies(clean_status_updated, catch_current, cap_month, cap_year, return_data = TRUE)
+write.taf(dat, file = paste0(year_cap,"_",ecoreg, "_FO_SAG_GESpies_without5stocks.csv"),dir ="report")
 
 #~~~~~~~~~~~~~~~#
 #E. ANNEX TABLE
